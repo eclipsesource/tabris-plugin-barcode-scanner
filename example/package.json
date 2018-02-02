@@ -1,0 +1,8 @@
+{
+  "title": "Tabris Barcode Scanner Example",
+  "description": "Example for the Tabris barcode scanner plugin.",
+  "main": "src/app.js",
+  "dependencies": {
+    "tabris": "nightly"
+  }
+}

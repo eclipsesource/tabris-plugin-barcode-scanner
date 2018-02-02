@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="tabris-plugin-barcode-scanner"
+        version="1.0.0">
+
+
+  <name>Tabris.js Barcode Scanner Plugin</name>
+  <description>A barcode scanner widget for Tabris.js</description>
+  <author>EclipseSource</author>
+  <license>Revised BSD License (3-clause license)</license>
+  <repo>https://github.com/eclipsesource/tabris-plugin-barcode-scanner.git</repo>
+  <issue>https://github.com/eclipsesource/tabris-plugin-barcode-scanner/issues</issue>
+
+  <!-- cordova -->
+  <engines>
+    <engine name="cordova" version=">=3.8.0" />
+  </engines>
+
+  <js-module src="www/BarcodeScannerView.js" name="barcodeScannerView">
+    <clobbers target="esbarcodescanner.BarcodeScannerView" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <meta-data
+          android:name="com.eclipsesource.tabris.android.OPERATOR.com.eclipsesource.tabris.barcode-scanner"
+          android:value="com.eclipsesource.tabris.barcodescanner.BarcodeScannerViewOperator" />
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.CAMERA" />
+    </config-file>
+
+    <framework src="com.android.support:appcompat-v7:27.0.2" />
+    <framework src="com.google.android.gms:play-services-vision:11.8.0" />
+
+    <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewOperator.kt"
+                 target-dir="src/com/eclipsesource/tabris/barcodescanner" />
+    <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewPropertyHandler.kt"
+                 target-dir="src/com/eclipsesource/tabris/barcodescanner" />
+    <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerView.kt"
+                 target-dir="src/com/eclipsesource/tabris/barcodescanner" />
+
+  </platform>
+
+</plugin>

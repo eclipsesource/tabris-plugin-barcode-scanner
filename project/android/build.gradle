@@ -1,0 +1,29 @@
+buildscript {
+    ext {
+        kotlinVersion= '1.2.21'
+        playServicesVersion = '11.8.0'
+        supportLibraryVersion = '27.0.2'
+    }
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven {
+            // provides tabris from directory repository
+            url System.getenv("TABRIS_ANDROID_PLATFORM") + "/bin/templates/project/m2repository"
+        }
+    }
+}
+
+apply plugin: 'android-reporting'

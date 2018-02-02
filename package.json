@@ -1,0 +1,35 @@
+{
+  "name": "tabris-plugin-barcode-scanner",
+  "version": "1.0.1",
+  "description": "A barcode scanner widget for Tabris.js",
+  "cordova": {
+    "id": "tabris-plugin-barcode-scanner",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eclipsesource/tabris-plugin-barcode-scanner.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "tabris",
+    "tabris.js",
+    "barcode-scanner"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.8.0"
+    }
+  ],
+  "author": "EclipseSource",
+  "license": "Revised BSD License (3-clause license)",
+  "bugs": {
+    "url": "https://github.com/eclipsesource/tabris-plugin-barcode-scanner/issues"
+  },
+  "homepage": "https://github.com/eclipsesource/tabris-plugin-barcode-scanner#readme"
+}

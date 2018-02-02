@@ -1,0 +1,6 @@
+example/
+project/
+.idea/
+.vscode/
+.gitignore
+.github
