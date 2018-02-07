@@ -114,6 +114,7 @@ Compatible with [Tabris.js 2.3.0](https://github.com/eclipsesource/tabris-js/rel
 ### Supported platforms
 
  * Android
+ * iOS
 
 ## Development of the widget
 
