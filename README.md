@@ -2,6 +2,28 @@
 
 A barcode scanner widget for [Tabris.js](https://tabrisjs.com), allowing to scan various types of barcodes.
 
+## Supported barcode formats
+
+The plugin supports the following barcodes.
+
+| Barcode            | Name              |   iOS | Android |
+| ------------------ | :---------------: | :---: | :-----: |
+| UPC-A              | `upcA`            | ✓     | ✓       |
+| UPC-E              | `upcE`            | ✓     | ✓       |
+| Code 39            | `code39`          | ✓     | ✓       |
+| Code 39 Mod 43     | `code39Mod43`     | ✓     |         |
+| Code93             | `code93`          | ✓     | ✓       | 
+| Code128            | `code128`         | ✓     | ✓       |
+| EAN-8              | `ean8`            | ✓     | ✓       |
+| EAN-13             | `ean13`           | ✓     | ✓       |
+| PDF417             | `pdf417`          | ✓     | ✓       |
+| QR                 | `qr`              | ✓     | ✓       |
+| Aztec              | `aztec`           | ✓     | ✓       |
+| Interleaved 2 of 5 | `interleaved2of5` | ✓     |         |
+| ITF14              | `itf`             | ✓     | ✓       |
+| DataMatrix         | `dataMatrix`      | ✓     | ✓       |
+| Codabar            | `codabar`         |       | ✓       |
+
 ## Example
 
 The following snippet shows how the `tabris-plugin-barcode-scanner` plugin can be used in a Tabris.js app:
@@ -11,7 +33,7 @@ let scanner = new esbarcodescanner.BarcodeScannerView({camera: 'back'})
   .on('detect', (e) => console.log(`Detected ${e.format} code with data ${e.data}`))
   .on('error', (e) => console.log(e.error))
   .appendTo(comp);
-scanner.start({format: 'qrCode'});
+scanner.start({formats: 'qr'});
 ```
 A more elaborate example can be found in the [example](example/) folder. It provides a Tabris.js project that demonstrates the various features of the `tabris-plugin-barcode-scanner` widget. Consult the [README](example/README.md) of the example for build instructions.
 
@@ -53,7 +75,7 @@ Fired when a barcode has been detected.
 
 #### error
 
-Fired when an error during the `BarcodeScannerView`s lifecycle happened. After an an error occured no further `detect` event will be fired.
+Fired when an error during the `BarcodeScannerView`s lifecycle happened. After an an error occurred no further `detect` event will be fired.
 
 ##### Event parameter
 * `error`: _string_
@@ -61,19 +83,19 @@ Fired when an error during the `BarcodeScannerView`s lifecycle happened. After a
 
 ### Functions
 
-#### `start([format])`
+#### `start([formats])`
 
-Enables the camera and starts scanning for barcodes. The given `format` can be used narrow down the detected barcodes.
+Enables the camera and starts scanning for barcodes. The given `formats` can be used narrow down the detected barcodes.
 
 Example:
 ```js
-scanner.start({format: ['qrCode']});
+scanner.start({formats: ['qr']});
 ```
 
 ##### Parameter
 
-* `format` : _string[]_
-  * The optional format allows to limit the detection of barcodes to only the given formats. If omitted all supported barcodes will be detected.
+* `formats` : _string[]_
+  * The optional `formats` array allows to limit the detection of barcodes to only the given formats. The supported barcode names can be obtained from the [list of supported barcodes](#supported-barcode-formats). If `formats` is omitted all barcodes supported on the platform will be detected.
   
 #### `stop()`
 
