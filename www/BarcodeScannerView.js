@@ -14,6 +14,13 @@ class BarcodeScannerView extends tabris.Widget {
     }
   }
 
+  _trigger(name, event) {
+    if (name === 'error') {
+      this.running = false;
+    }
+    return super._trigger(name, event);
+  }
+
   start(formats = []) {
     if (this.running) {
       throw new Error('BarcodeScanner is already running')
@@ -23,6 +30,7 @@ class BarcodeScannerView extends tabris.Widget {
   }
 
   stop() {
+    this.running = false;
     this._nativeCall('stop');
   }
 
