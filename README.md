@@ -4,7 +4,7 @@ A barcode scanner widget for [Tabris.js](https://tabrisjs.com), allowing to scan
 
 ## Supported barcode formats
 
-The plugin supports the following barcodes.
+The plugin supports the following barcode formats.
 
 | Barcode            | Name              |   iOS | Android |
 | ------------------ | :---------------: | :---: | :-----: |
@@ -29,10 +29,11 @@ The plugin supports the following barcodes.
 The following snippet shows how the `tabris-plugin-barcode-scanner` plugin can be used in a Tabris.js app:
 
 ```javascript
-let scanner = new esbarcodescanner.BarcodeScannerView({camera: 'back'})
-  .on('detect', (e) => console.log(`Detected ${e.format} code with data ${e.data}`))
+let scanner = new esbarcodescanner.BarcodeScannerView({
+  left: 0, right: 0, top: 0, bottom: 0
+}).on('detect', (e) => console.log(`Detected ${e.format} code with data ${e.data}`))
   .on('error', (e) => console.log(e.error))
-  .appendTo(comp);
+  .appendTo(tabris.ui.contentView);
 scanner.start({formats: 'qr'});
 ```
 A more elaborate example can be found in the [example](example/) folder. It provides a Tabris.js project that demonstrates the various features of the `tabris-plugin-barcode-scanner` widget. Consult the [README](example/README.md) of the example for build instructions.
@@ -52,7 +53,7 @@ To fetch the latest development version use the GitHub URL:
 
 ## API
 
-The wiget api consists of the object `esbarcodescanner.BarcodeScannerView` with the following properties and events.
+The widget api consists of the object `esbarcodescanner.BarcodeScannerView` with the following properties and events.
 
 ### Properties
 
@@ -85,11 +86,11 @@ Fired when an error during the `BarcodeScannerView`s lifecycle happened. After a
 
 #### `start([formats])`
 
-Enables the camera and starts scanning for barcodes. The given `formats` can be used narrow down the detected barcodes.
+Enables the camera and starts scanning for barcodes. When started, the barcode scanner continuously fires the [`detect`](#detect) event as soon as it finds a barcode in its view. To end barcode detection [`stop()`](#`stop()`) should be called or the widget should be disposed. The given `formats` array can be used to narrow down the detected barcodes. 
 
 Example:
 ```js
-scanner.start({formats: ['qr']});
+scanner.start(['qr']);
 ```
 
 ##### Parameter
