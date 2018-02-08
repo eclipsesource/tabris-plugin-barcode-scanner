@@ -63,11 +63,11 @@ The following properties can be applied on top of the [common Tabris.js widget p
   * The camera to use when scanning for barcodes. Has to be set in the constructor of the `BarcodeScannerView`. 
   
 * `running` : _boolean_, readonly
-  * Calling  [start()](#`start([formats])`) sets the `running` property to `true`. Calling [stop()](#`stop()`) sets the `running` property to `false`. When an error occurs or the widget is disposed the `running` state is also `false`.
+  * Calling  [`start()`](#startformats) sets the `running` property to `true`. Calling [`stop()`](#stop) sets the `running` property to `false`. When an [`error`](#error) occurs or the widget is disposed the `running` state is also `false`.
 
 ### Events
 
-#### detect
+#### `detect`
 
 Fired when a barcode has been detected. The rate of `detect` events varies from platform to platform. It is very likely to receive duplicate events for the same barcode.
 
@@ -77,23 +77,23 @@ Fired when a barcode has been detected. The rate of `detect` events varies from 
 * `data`: _string_
   * The data contained in the barcode
 
-#### error
+#### `error`
 
-Fired when an error during the `BarcodeScannerView`s lifecycle happened. After an an error occurred no further `detect` event will be fired and the widget becomes unusable.
+Fired when an error during the `BarcodeScannerView`s lifecycle happened. After an an error occurred no further [`detect`](#detect) event will be fired and the widget becomes unusable.
 
 ##### Event parameter
 * `error`: _string_
-  * Details about the error
+  * A message providing details about the error
   
-#### runningChanged
+#### `runningChanged`
   
-Fired when the `running` state of the widget changes. Either by calling [start()](#`start([formats])`)/[stop()](#`stop()`), receiving an `error` event or disposing the widget.
+Fired when the [`running`](#running) state of the widget changes. Either by calling [`start()`](#startformats)/[`stop()`](#stop), receiving an [`error`](#error) event or disposing the widget.
 
 ### Functions
 
 #### `start([formats])`
 
-Enables the camera and starts scanning for barcodes. When started, the barcode scanner continuously fires the [`detect`](#detect) event as soon as it finds a barcode in its view. To end barcode detection [`stop()`](#`stop()`) should be called or the widget should be disposed. Not disabling the barcode scanner will consume a lot of unnecessary processing power. The given `formats` array can be used to narrow down the detected barcodes.
+Enables the camera and starts scanning for barcodes. When started, the barcode scanner continuously fires the [`detect`](#detect) event as soon as it finds a barcode in its view. To end barcode detection [`stop()`](#stop) should be called or the widget should be disposed. Not disabling the barcode scanner will consume a lot of unnecessary processing power. The given `formats` array can be used to narrow down the detected barcodes.
 
 Example:
 ```js
