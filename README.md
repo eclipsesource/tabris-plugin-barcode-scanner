@@ -138,6 +138,18 @@ export TABRIS_ANDROID_PLATFORM=/home/user/tabris-android-cordova
 ```
  The environment variable is consumed in the gradle projects [build.gradle](project/android/build.gradle) file.
 
+### iOS
+
+The plugin requires key-value entry. `NSCameraUsageDescription` with description has to be added to the `Info.plist` file of your app to work correctly. Please include it in your `project.xml` file. 
+
+```xml
+<platform name="ios">
+  <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+    <string>Your custom description.</string>
+  </edit-config>
+</platform>
+```
+
 ## Copyright
 
  See [LICENSE](LICENSE) notice.
