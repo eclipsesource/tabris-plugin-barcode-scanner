@@ -12,4 +12,10 @@
 
   <plugin name="tabris-plugin-barcode-scanner" spec="../" />
 
+  <platform name="ios">
+    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+      <string>Barcode scanner requires camera to be able to scan barcodes.</string>
+    </edit-config>
+  </platform>
+
 </widget>
