@@ -45,4 +45,18 @@
 
   </platform>
 
+  <platform name="ios">
+
+    <config-file target="*TabrisPlugins.plist" parent="classes">
+      <array>
+        <string>ESBarcodeScanner</string>
+      </array>
+    </config-file>
+
+    <header-file src="src/ios/ESBarcodeScanner.h" />
+    <source-file src="src/ios/ESBarcodeScanner.m" />
+    <header-file src="src/ios/ESScannerView.h" />
+    <source-file src="src/ios/ESScannerView.m" />
+  </platform>
+
 </plugin>
