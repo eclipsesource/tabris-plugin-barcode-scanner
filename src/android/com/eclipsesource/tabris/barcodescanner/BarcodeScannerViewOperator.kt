@@ -32,15 +32,16 @@ class BarcodeScannerViewOperator(activity: Activity, tabrisContext: TabrisContex
     }
   }
 
-  private fun getFormats(scannerView: BarcodeScannerView, properties: Properties): Int {
-    return properties.getListSafe("formats", String::class.java)
-        .map { scannerView.barcodeNames.entries.first { entry -> entry.value == it }.key }
-        .fold(Barcode.ALL_FORMATS, Int::or)
-  }
+  private fun getFormats(scannerView: BarcodeScannerView, properties: Properties) =
+      properties.getListSafe("formats", String::class.java).map {
+        (BARCODE_NAMES.entries.firstOrNull { entry -> entry.value == it }
+            ?: return Barcode.ALL_FORMATS).key
+      }.fold(Barcode.ALL_FORMATS, Int::or)
 
   override fun destroy(scannerView: BarcodeScannerView) {
     scannerView.stop()
     tabrisContext.widgetToolkit.removeAppStateListener(scannerView)
     super.destroy(scannerView)
   }
+
 }

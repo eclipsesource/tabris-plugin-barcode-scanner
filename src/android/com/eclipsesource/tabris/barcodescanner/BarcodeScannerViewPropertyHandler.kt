@@ -10,6 +10,9 @@ class BarcodeScannerViewPropertyHandler(activity: Activity, tabrisContext: Tabri
 
   override fun set(barcodeScannerView: BarcodeScannerView, properties: Properties) {
     super.set(barcodeScannerView, properties)
+    properties.getString("scaleMode")?.let {
+      barcodeScannerView.scaleMode = ScaleMode.valueOf(it.toUpperCase())
+    }
   }
 
 }
