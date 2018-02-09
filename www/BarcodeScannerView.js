@@ -49,6 +49,10 @@ tabris.NativeObject.defineProperties(BarcodeScannerView.prototype, {
     type: ['choice', ['front', 'back']],
     default: 'back'
   },
+  'scaleMode': {
+    type: ['choice', ['fit', 'fill']],
+    default: 'fit'
+  },
   'running': {
     type: 'boolean',
     readonly: true

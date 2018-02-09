@@ -2,6 +2,7 @@ const {ui, Composite, Button, Picker, TextView} = require('tabris');
 
 const BARCODES = ['all formats', 'upcA', 'upcE', 'code39', 'code39Mod43', 'code93', 'code128', 'ean8', 'ean13', 'pdf417',
   'qr', 'aztec', 'interleaved2of5', 'itf', 'dataMatrix', 'codabar'];
+const SCALE_MODES = ['fit', 'fill'];
 
 let scanner = new esbarcodescanner.BarcodeScannerView({
   left: 0, right: 0, top: 0, bottom: '#controls',
@@ -37,6 +38,13 @@ let formatPicker = new Picker({
   itemCount: BARCODES.length,
   itemText: (index) => BARCODES[index],
 }).appendTo(controls);
+
+new Picker({
+  left: 16, right: 16, top: 'prev() 16',
+  itemCount: SCALE_MODES.length,
+  itemText: (index) => SCALE_MODES[index],
+}).on('select', (event) => scanner.scaleMode = SCALE_MODES[event.index])
+  .appendTo(controls);
 
 let scannerButton = new Button({
   left: 16, right: 16, top: 'prev() 16', bottom: 24

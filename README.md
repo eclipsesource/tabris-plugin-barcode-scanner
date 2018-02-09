@@ -59,11 +59,17 @@ The widget api consists of the object `esbarcodescanner.BarcodeScannerView` with
 
 The following properties can be applied on top of the [common Tabris.js widget properties](https://tabrisjs.com/documentation/latest/api/Widget#properties):
 
-* `camera` : _string_, supported values: `front`, `back`, default: `back`
-  * The camera to use when scanning for barcodes. Has to be set in the constructor of the `BarcodeScannerView`. 
-  
-* `running` : _boolean_, readonly
-  * Calling  [`start()`](#startformats) sets the `running` property to `true`. Calling [`stop()`](#stop) sets the `running` property to `false`. When an [`error`](#error) occurs or the widget is disposed the `running` state is also `false`.
+##### `camera` : _string_, supported values: `front`, `back`, default: `back`
+
+The camera to use when scanning for barcodes. Has to be set in the constructor of the `BarcodeScannerView`. 
+
+##### `scaleMode` : _string_, supported values: `fit`, `fill`, default: `fit`
+
+How to scale the camera frame inside the bounds of the `BarcodeScannerView`. Setting the `scaleMode` to `fit` shows the full camera frame while potentially leaving blank space on the sides. Setting the `scaleMode` to `fill` will make the camera frame cover the view bounds while potentially clipping some of the camera frame edges.
+
+##### `running` : _boolean_, readonly
+
+Calling  [`start()`](#startformats) sets the `running` property to `true`. Calling [`stop()`](#stop) sets the `running` property to `false`. When an [`error`](#error) occurs or the widget is disposed the `running` state is also `false`.
 
 ### Events
 
