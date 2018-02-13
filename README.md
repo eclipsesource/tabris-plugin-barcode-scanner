@@ -34,15 +34,17 @@ let scanner = new esbarcodescanner.BarcodeScannerView({
 }).on('detect', (e) => console.log(`Detected ${e.format} code with data ${e.data}`))
   .on('error', (e) => console.log(e.error))
   .appendTo(tabris.ui.contentView);
-scanner.start({formats: 'qr'});
+scanner.start(['qr', 'ean13']);
 ```
 A more elaborate example can be found in the [example](example/) folder. It provides a Tabris.js project that demonstrates the various features of the `tabris-plugin-barcode-scanner` widget. Consult the [README](example/README.md) of the example for build instructions.
 
 ## Integrating the plugin
 The Tabris.js website provides detailed information on how to [integrate custom widgets](https://tabrisjs.com/documentation/latest/build#adding-plugins) in your Tabris.js app. To add the plugin to your app add the following entry in your apps `config.xml`:
 
+
 ```xml
-<plugin name="tabris-plugin-barcode-scanner" spec="^1.0.0" />
+<!-- Not yet released to npm -->
+<!-- <plugin name="tabris-plugin-barcode-scanner" spec="^1.0.0" /> -->
 ```
 
 To fetch the latest development version use the GitHub URL:
