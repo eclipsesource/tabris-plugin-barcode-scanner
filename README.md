@@ -24,6 +24,10 @@ The plugin supports the following barcode formats.
 | DataMatrix         | `dataMatrix`      | ✓     | ✓       |
 | Codabar            | `codabar`         |       | ✓       |
 
+## General usage
+
+The BarcodeScannerView can be embedded into the Tabris view hierarchy like any other view. Once embedded it show a blank screen until the [`start()`](#startformats) method has been called. At that point the device camera is show in the views bounds and barcode detection is enabled. The [`detect`](#detect) event will fire once a barcode is detected in the camera. The callback might fire multiple times for the same barcode. Barcode scanning continues until [`stop()`](#stop) is called. At that time the camera is deactivated. It is recommended to stop barcode detection when not needed as it draws considerable power. 
+
 ## Example
 
 The following snippet shows how the `tabris-plugin-barcode-scanner` plugin can be used in a Tabris.js app:
@@ -67,7 +71,7 @@ The plugin requires key-value entry. `NSCameraUsageDescription` with description
 
 ## API
 
-The widget api consists of the object `esbarcodescanner.BarcodeScannerView` with the following properties and events.
+The widget api consists of the object `esbarcodescanner.BarcodeScannerView` with the following properties, events and methods.
 
 ### Properties
 
@@ -109,7 +113,7 @@ Fired when an error during the `BarcodeScannerView`s lifecycle happened. After a
   
 Fired when the [`running`](#running) state of the widget changes. Either by calling [`start()`](#startformats)/[`stop()`](#stop), receiving an [`error`](#error) event or disposing the widget.
 
-### Functions
+### Methods
 
 #### `start([formats])`
 
