@@ -1,0 +1,65 @@
+import { EventObject, PropertyChangedEvent, Widget, WidgetEvents, WidgetProperties } from 'tabris';
+/// <reference path='../../node_modules/tabris/tabris.d.ts' />
+
+interface BarcodeScannerViewProperties {
+  camera?: 'front' | 'back';
+  scaleMode?: 'fit' | 'fill';
+  readonly running?: boolean;
+}
+
+interface BarcodeScannerViewEvents extends WidgetEvents {
+  detect?: (event: DetectEvent) => void;
+  error?: (event: ErrorEvent) => void;
+  runningChanged?: (event: RunningChangedEvent) => void;
+}
+
+declare global {
+  namespace esbarcodescanner {
+    interface BarcodeScannerView extends BarcodeScannerViewProperties {}
+    class BarcodeScannerView extends Widget {
+      public tsProperties: WidgetProperties & BarcodeScannerViewProperties;
+      public jsxProperties: JSX.WidgetProperties & BarcodeScannerViewProperties & {
+        onDetect?: (event: DetectEvent) => void,
+        onError?: (event: ErrorEvent) => void,
+        onRunningChanged?: (event: RunningChangedEvent) => void
+      };
+      constructor(properties: WidgetProperties & BarcodeScannerViewProperties);
+      start(formats: BarcodeScannerFormat[]): void;
+      stop(): void;
+      on(type: string, listener: (event: any) => void, context?: object): this;
+      on(listeners: BarcodeScannerViewEvents): this;
+      off(type: string, listener: (event: any) => void, context?: object): this;
+      off(listeners: BarcodeScannerViewEvents): this;
+      once(type: string, listener: (event: any) => void, context?: object): this;
+      once(listeners: BarcodeScannerViewEvents): this;
+    }
+  }
+}
+
+type BarcodeScannerFormat =
+  'upcA' |
+  'upcE' |
+  'code39' |
+  'code39Mod43' |
+  'code93' |
+  'code128' |
+  'ean8' |
+  'ean13' |
+  'pdf417' |
+  'qr' |
+  'aztec' |
+  'interleaved2of5' |
+  'itf' |
+  'dataMatrix' |
+  'codabar';
+
+interface ErrorEvent extends EventObject<esbarcodescanner.BarcodeScannerView> {
+  error: string;
+}
+
+interface DetectEvent extends EventObject<esbarcodescanner.BarcodeScannerView> {
+  format: BarcodeScannerFormat;
+  data: string;
+}
+
+type RunningChangedEvent = PropertyChangedEvent<esbarcodescanner.BarcodeScannerView, boolean>;
