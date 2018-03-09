@@ -2,6 +2,7 @@
   "name": "tabris-plugin-barcode-scanner",
   "version": "1.0.1",
   "description": "A barcode scanner widget for Tabris.js",
+  "types": "./types/index.d.ts",
   "cordova": {
     "id": "tabris-plugin-barcode-scanner",
     "platforms": [
