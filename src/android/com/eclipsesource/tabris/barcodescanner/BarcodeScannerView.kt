@@ -163,6 +163,10 @@ class BarcodeScannerView(private val activity: Activity, private val tabrisConte
     val detector = BarcodeDetector.Builder(activity).setBarcodeFormats(formats).build().apply {
       setProcessor(multiProcessor)
     }
+    if (!detector.isOperational) {
+      remoteObject?.notify("error", "error", "Barcode scanner dependencies not available. Is device storage available?")
+      return
+    }
     cameraSource = CameraSource.Builder(activity, detector)
         .setRequestedPreviewSize(1024, 768)
         .setFacing(camera)
