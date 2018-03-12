@@ -26,13 +26,13 @@ class BarcodeScannerViewOperator(activity: Activity, tabrisContext: TabrisContex
 
   override fun call(scannerView: BarcodeScannerView, method: String, properties: Properties): Any? {
     return when (method) {
-      "start" -> scannerView.start(getFormats(scannerView, properties));
+      "start" -> scannerView.start(getFormats(properties));
       "stop" -> scannerView.stop();
       else -> super.call(scannerView, method, properties)
     }
   }
 
-  private fun getFormats(scannerView: BarcodeScannerView, properties: Properties) =
+  private fun getFormats(properties: Properties) =
       properties.getListSafe("formats", String::class.java).map {
         (BARCODE_NAMES.entries.firstOrNull { entry -> entry.value == it }
             ?: return Barcode.ALL_FORMATS).key
