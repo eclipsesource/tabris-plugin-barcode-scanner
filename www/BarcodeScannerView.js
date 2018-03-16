@@ -27,6 +27,7 @@ class BarcodeScannerView extends tabris.Widget {
 
   _dispose() {
     this.stop();
+    super._dispose();
   }
 
   start(formats = []) {
