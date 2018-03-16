@@ -67,6 +67,7 @@
 
 - (void)setScaleMode:(NSString *)scaleMode {
     _scaleMode = scaleMode;
+    self.scanner.scaleMode = scaleMode;
 }
 
 - (void)start:(NSDictionary *)properties {
