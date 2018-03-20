@@ -59,14 +59,12 @@ To fetch the latest development version use the GitHub URL:
 
 ### iOS
 
-The plugin requires key-value entry. `NSCameraUsageDescription` with description has to be added to the `Info.plist` file of your app to work correctly. Please include it in your `project.xml` file. 
+The plugin requires key-value entry. `NSCameraUsageDescription` with description has to be added to the `Info.plist` file of your app to work correctly. Please include this configuration in your `config.xml` file. 
 
 ```xml
-<platform name="ios">
-  <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-    <string>Your custom description.</string>
-  </edit-config>
-</platform>
+<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+  <string>Your custom description.</string>
+</edit-config>
 ```
 
 ## API
