@@ -26,8 +26,8 @@ class BarcodeScannerViewOperator(activity: Activity, tabrisContext: TabrisContex
 
   override fun call(scannerView: BarcodeScannerView, method: String, properties: Properties): Any? {
     return when (method) {
-      "start" -> scannerView.start(getFormats(properties));
-      "stop" -> scannerView.stop();
+      "start" -> scannerView.start(getFormats(properties))
+      "stop" -> scannerView.stop()
       else -> super.call(scannerView, method, properties)
     }
   }
