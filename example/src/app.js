@@ -10,9 +10,9 @@ let scanner = new esbarcodescanner.BarcodeScannerView({
   barcodeTextView.text = `<b>${event.format}</b><br /><i>${event.data}</i>`;
   barcodeTextView.background = '#66BB6A';
   setTimeout(() => barcodeTextView.background = 'white', 500);
-}).on('runningChanged', ({value: running}) => {
-  scannerButton.text = (running ? 'Stop' : 'Start') + ' barcode scanner';
-  formatPicker.enabled = !running;
+}).on('activeChanged', ({value: active}) => {
+  scannerButton.text = (active ? 'Stop' : 'Start') + ' barcode scanner';
+  formatPicker.enabled = !active;
 }).on('error', (event) => console.log(event.error))
   .appendTo(ui.contentView);
 
@@ -52,7 +52,7 @@ let scannerButton = new Button({
   .appendTo(controls);
 
 function toggleScanner() {
-  if (scanner.running) {
+  if (scanner.active) {
     scanner.stop();
   } else {
     let index = formatPicker.selectionIndex;

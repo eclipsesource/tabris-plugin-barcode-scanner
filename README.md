@@ -83,9 +83,9 @@ The camera to use when scanning for barcodes. Has to be set in the constructor o
 
 How to scale the camera frame inside the bounds of the `BarcodeScannerView`. Setting the `scaleMode` to `fit` shows the full camera frame while potentially leaving blank space on the sides. Setting the `scaleMode` to `fill` will make the camera frame cover the view bounds while potentially clipping some of the camera frame edges.
 
-##### `running` : _boolean_, readonly
+##### `active` : _boolean_, readonly
 
-Calling  [`start()`](#startformats) sets the `running` property to `true`. Calling [`stop()`](#stop) sets the `running` property to `false`. When an [`error`](#error) occurs or the widget is disposed the `running` state is also `false`.
+Calling  [`start()`](#startformats) sets the `active` property to `true`. Calling [`stop()`](#stop) sets the `active` property to `false`. When an [`error`](#error) occurs or the widget is disposed the `active` state is also set to`false`.
 
 ### Events
 
@@ -107,9 +107,9 @@ Fired when an error during the `BarcodeScannerView`s lifecycle happened. After a
 * `error`: _string_
   * A message providing details about the error
   
-#### `runningChanged`
+#### `activeChanged`
   
-Fired when the [`running`](#running) state of the widget changes. Either by calling [`start()`](#startformats)/[`stop()`](#stop), receiving an [`error`](#error) event or disposing the widget.
+Fired when the [`active`](#active) state of the widget changes. Either by calling [`start()`](#startformats)/[`stop()`](#stop), receiving an [`error`](#error) event or disposing the widget.
 
 ### Methods
 

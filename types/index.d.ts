@@ -4,13 +4,13 @@ import { EventObject, PropertyChangedEvent, Widget, WidgetEvents, WidgetProperti
 interface BarcodeScannerViewProperties {
   camera?: 'front' | 'back';
   scaleMode?: 'fit' | 'fill';
-  readonly running?: boolean;
+  readonly active?: boolean;
 }
 
 interface BarcodeScannerViewEvents extends WidgetEvents {
   detect?: (event: DetectEvent) => void;
   error?: (event: ErrorEvent) => void;
-  runningChanged?: (event: RunningChangedEvent) => void;
+    activeChanged?: (event: ActiveChangedEvent) => void;
 }
 
 declare global {
@@ -21,7 +21,7 @@ declare global {
       public jsxProperties: JSX.WidgetProperties & BarcodeScannerViewProperties & {
         onDetect?: (event: DetectEvent) => void,
         onError?: (event: ErrorEvent) => void,
-        onRunningChanged?: (event: RunningChangedEvent) => void
+        onActiveChanged?: (event: ActiveChangedEvent) => void
       };
       constructor(properties: WidgetProperties & BarcodeScannerViewProperties);
       start(formats: BarcodeScannerFormat[]): void;
@@ -62,4 +62,4 @@ interface DetectEvent extends EventObject<esbarcodescanner.BarcodeScannerView> {
   data: string;
 }
 
-type RunningChangedEvent = PropertyChangedEvent<esbarcodescanner.BarcodeScannerView, boolean>;
+type ActiveChangedEvent = PropertyChangedEvent<esbarcodescanner.BarcodeScannerView, boolean>;

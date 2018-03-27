@@ -31,16 +31,16 @@ class BarcodeScannerView extends tabris.Widget {
   }
 
   start(formats = []) {
-    if (this.running) {
-      throw new Error('BarcodeScanner is already running')
+    if (this.active) {
+      throw new Error('BarcodeScanner is already active')
     }
     this._nativeCall('start', {formats});
-    this._storeProperty('running', true);
+    this._storeProperty('active', true);
   }
 
   stop() {
     this._nativeCall('stop');
-    this._storeProperty('running', false);
+    this._storeProperty('active', false);
   }
 
 }
@@ -54,7 +54,7 @@ tabris.NativeObject.defineProperties(BarcodeScannerView.prototype, {
     type: ['choice', ['fit', 'fill']],
     default: 'fit'
   },
-  'running': {
+  'active': {
     type: 'boolean',
     readonly: true
   },
