@@ -6,7 +6,7 @@ A barcode scanner widget for [Tabris.js](https://tabrisjs.com), allowing to scan
 
 ## General usage
 
-The BarcodeScannerView can be embedded into the Tabris view hierarchy like any other view. Once embedded it show a blank screen until the [`start()`](#startformats) method has been called. At that point the device camera is show in the views bounds and barcode detection is enabled. The [`detect`](#detect) event will fire once a barcode is detected in the camera. The callback might fire multiple times for the same barcode. Barcode scanning continues until [`stop()`](#stop) is called. At that time the camera is deactivated. It is recommended to stop barcode detection when not needed as it draws considerable power. 
+The plugin provides a `BarcodeScannerView` which can be embedded into the Tabris.js view hierarchy like any other view. Once embedded it shows a blank screen until the [`start()`](#startformats) method is called. At that point the device camera is displayed in the view bounds and barcode detection is activated. The [`detect`](#detect) event will fire when a barcode is detected in the camera view. The callback might fire multiple times for the same barcode. Barcode scanning continues until [`stop()`](#stop) is called which also deactivates the camera. It is recommended to stop barcode detection when not needed as it draws considerable power.
 
 ## Supported barcode formats
 
