@@ -2,6 +2,12 @@
 
 A barcode scanner widget for [Tabris.js](https://tabrisjs.com), allowing to scan various types of barcodes.
 
+![barcode scanner screenshots](assets/tabris-plugin-barcode-scanner.jpg)
+
+## General usage
+
+The BarcodeScannerView can be embedded into the Tabris view hierarchy like any other view. Once embedded it show a blank screen until the [`start()`](#startformats) method has been called. At that point the device camera is show in the views bounds and barcode detection is enabled. The [`detect`](#detect) event will fire once a barcode is detected in the camera. The callback might fire multiple times for the same barcode. Barcode scanning continues until [`stop()`](#stop) is called. At that time the camera is deactivated. It is recommended to stop barcode detection when not needed as it draws considerable power. 
+
 ## Supported barcode formats
 
 The plugin supports the following barcode formats.
@@ -12,7 +18,7 @@ The plugin supports the following barcode formats.
 | UPC-E              | `upcE`            | ✓     | ✓       |
 | Code 39            | `code39`          | ✓     | ✓       |
 | Code 39 Mod 43     | `code39Mod43`     | ✓     |         |
-| Code93             | `code93`          | ✓     | ✓       | 
+| Code93             | `code93`          | ✓     | ✓       |
 | Code128            | `code128`         | ✓     | ✓       |
 | EAN-8              | `ean8`            | ✓     | ✓       |
 | EAN-13             | `ean13`           | ✓     | ✓       |
@@ -23,10 +29,6 @@ The plugin supports the following barcode formats.
 | ITF14              | `itf`             | ✓     | ✓       |
 | DataMatrix         | `dataMatrix`      | ✓     | ✓       |
 | Codabar            | `codabar`         |       | ✓       |
-
-## General usage
-
-The BarcodeScannerView can be embedded into the Tabris view hierarchy like any other view. Once embedded it show a blank screen until the [`start()`](#startformats) method has been called. At that point the device camera is show in the views bounds and barcode detection is enabled. The [`detect`](#detect) event will fire once a barcode is detected in the camera. The callback might fire multiple times for the same barcode. Barcode scanning continues until [`stop()`](#stop) is called. At that time the camera is deactivated. It is recommended to stop barcode detection when not needed as it draws considerable power. 
 
 ## Example
 
