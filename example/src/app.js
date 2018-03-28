@@ -18,7 +18,7 @@ let scanner = new esbarcodescanner.BarcodeScannerView({
 
 let controls = new Composite({
   id: 'controls',
-  left: 0, right: 0, bottom: 0, height: tabris.device.platform === 'iOS' ? 204 : undefined,
+  left: 0, right: 0, bottom: 0,
   background: '#FAFAFA',
 }).appendTo(ui.contentView);
 
