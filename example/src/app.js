@@ -1,7 +1,7 @@
 const {ui, Composite, Button, Picker, TextView} = require('tabris');
 
-const BARCODES = ['all formats', 'upcA', 'upcE', 'code39', 'code39Mod43', 'code93', 'code128', 'ean8', 'ean13', 'pdf417',
-  'qr', 'aztec', 'interleaved2of5', 'itf', 'dataMatrix', 'codabar'];
+const BARCODES = ['all formats', 'upcA', 'upcE', 'code39', 'code39Mod43', 'code93', 'code128',
+  'ean8', 'ean13', 'pdf417', 'qr', 'aztec', 'interleaved2of5', 'itf', 'dataMatrix', 'codabar'];
 const SCALE_MODES = ['fit', 'fill'];
 
 let scanner = new esbarcodescanner.BarcodeScannerView({
