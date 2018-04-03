@@ -3,6 +3,6 @@
   "description": "Example for the Tabris barcode scanner plugin.",
   "main": "src/app.js",
   "dependencies": {
-    "tabris": "nightly"
+    "tabris": "2.4.x"
   }
 }
