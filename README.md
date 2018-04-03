@@ -49,8 +49,7 @@ The Tabris.js website provides detailed information on how to [integrate custom 
 
 
 ```xml
-<!-- Not yet released to npm -->
-<!-- <plugin name="tabris-plugin-barcode-scanner" spec="^1.0.0" /> -->
+<plugin name="tabris-plugin-barcode-scanner" spec="1.x" />
 ```
 
 To fetch the latest development version use the GitHub URL:
@@ -75,7 +74,8 @@ The widget api consists of the object `esbarcodescanner.BarcodeScannerView` with
 
 ### Properties
 
-The following properties can be applied on top of the [common Tabris.js widget properties](https://tabrisjs.com/documentation/latest/api/Widget#properties):
+The following properties can be applied in addition to the [common Tabris.js widget properties](https://tabrisjs
+.com/documentation/latest/api/Widget#properties):
 
 ##### `camera` : _string_, supported values: `front`, `back`, default: `back`
 
