@@ -30,11 +30,11 @@ class BarcodeScannerView extends tabris.Widget {
     super._dispose();
   }
 
-  start(formats = []) {
+  start(formats) {
     if (this.active) {
       throw new Error('BarcodeScanner is already active')
     }
-    this._nativeCall('start', {formats});
+    this._nativeCall('start', {formats: formats || []});
     this._storeProperty('active', true);
   }
 
