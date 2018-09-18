@@ -35,8 +35,8 @@
     return self;
 }
 
-- (instancetype)initWithObjectId:(NSString *)objectId properties:(NSDictionary *)properties andClient:(TabrisClient *)client {
-    self = [super initWithObjectId:objectId properties:properties andClient:client];
+- (instancetype)initWithObjectId:(NSString *)objectId properties:(NSDictionary *)properties inContext:(id<TabrisContext>)context {
+    self = [super initWithObjectId:objectId properties:properties inContext:context];
     if (self) {
         NSString *camera = [properties objectForKey:@"camera"];
         if (camera) {
@@ -185,15 +185,13 @@
 
 - (void)sendDetect:(NSString *)data format:(NSString *)format {
     if (self.detectListener) {
-        Message<Notification> *msg = [[self notifications] forObject:self];
-        [msg fireEvent:@"detect" withAttributes:@{@"format":format, @"data":data}];
+        [self fireEventNamed:@"detect" withAttributes:@{@"format":format, @"data":data}];
     }
 }
 
 - (void)sendError:(NSString *)error {
     if (self.errorListener) {
-        Message<Notification> *msg = [[self notifications] forObject:self];
-        [msg fireEvent:@"error" withAttributes:@{@"error":error}];
+        [self fireEventNamed:@"error" withAttributes:@{@"error":error}];
     }
 }
 
