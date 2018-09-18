@@ -22,29 +22,24 @@
 
 @implementation ESBarcodeScanner
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.scanner = [ESScannerView new];
-        self.camera = @"back";
-        self.scaleMode = @"fit";
-        [self registerSelector:@selector(start:) forCall:@"start"];
-        [self registerSelector:@selector(stop) forCall:@"stop"];
-        [self defineWidgetView:self.scanner];
-    }
-    return self;
-}
-
 - (instancetype)initWithObjectId:(NSString *)objectId properties:(NSDictionary *)properties inContext:(id<TabrisContext>)context {
     self = [super initWithObjectId:objectId properties:properties inContext:context];
     if (self) {
+        self.scanner = [ESScannerView new];
+        [self registerSelector:@selector(start:) forCall:@"start"];
+        [self registerSelector:@selector(stop) forCall:@"stop"];
+        [self defineWidgetView:self.scanner];
         NSString *camera = [properties objectForKey:@"camera"];
         if (camera) {
             self.camera = camera;
+        } else {
+            self.camera = @"back";
         }
         NSString *scaleMode = [properties objectForKey:@"scaleMode"];
         if (scaleMode) {
             self.scaleMode = scaleMode;
+        } else {
+            self.scaleMode = @"fit";
         }
     }
     return self;
