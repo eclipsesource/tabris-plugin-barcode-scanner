@@ -5,12 +5,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat.checkSelfPermission
-import android.support.v4.content.PermissionChecker.PERMISSION_GRANTED
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.eclipsesource.tabris.android.RemoteObject
 import com.eclipsesource.tabris.android.TabrisContext
 import com.eclipsesource.tabris.android.internal.toolkit.AppState
