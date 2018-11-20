@@ -2,7 +2,6 @@ package com.eclipsesource.tabris.barcodescanner
 
 import android.Manifest.permission.CAMERA
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.view.SurfaceHolder
@@ -11,11 +10,12 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
-import com.eclipsesource.tabris.android.RemoteObject
-import com.eclipsesource.tabris.android.TabrisContext
-import com.eclipsesource.tabris.android.internal.toolkit.AppState
-import com.eclipsesource.tabris.android.internal.toolkit.IAppStateListener
-import com.eclipsesource.tabris.android.internal.toolkit.IRequestPermissionResultListener
+import com.eclipsesource.tabris.android.ActivityScope
+import com.eclipsesource.tabris.android.ActivityState
+import com.eclipsesource.tabris.android.ActivityState.PAUSE
+import com.eclipsesource.tabris.android.ActivityState.RESUME
+import com.eclipsesource.tabris.android.Events
+import com.eclipsesource.tabris.android.post
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.MultiProcessor
 import com.google.android.gms.vision.Tracker
@@ -38,15 +38,19 @@ val BARCODE_NAMES = mapOf(
     Barcode.AZTEC to "aztec"
 )
 
-enum class ScaleMode {
-  FIT, FILL
+enum class ScaleMode(val id: String) {
+
+  FIT("fit"), FILL("fill");
+
+  companion object {
+    fun find(id: String?) = values().find { it.id == id }
+  }
 }
 
 @SuppressLint("ViewConstructor", "MissingPermission")
-class BarcodeScannerView(private val activity: Activity, private val tabrisContext: TabrisContext)
-  : ViewGroup(activity), IAppStateListener {
+class BarcodeScannerView(private val scope: ActivityScope)
+  : ViewGroup(scope.activity), Events.ActivityStateListener {
 
-  val remoteObject: RemoteObject? get() = tabrisContext.objectRegistry.getRemoteObjectForObject(this)
   var camera = CameraSource.CAMERA_FACING_BACK
   var scaleMode: ScaleMode = ScaleMode.FIT
     set(value) {
@@ -58,14 +62,14 @@ class BarcodeScannerView(private val activity: Activity, private val tabrisConte
   private val multiProcessor = MultiProcessor.Builder<Barcode>(MultiProcessor.Factory {
     object : Tracker<Barcode>() {
       override fun onNewItem(id: Int, barcode: Barcode) {
-        tabrisContext.widgetToolkit.executeInUiThread({
-          remoteObject?.notify("detect",
+        scope.post {
+          remoteObject(this@BarcodeScannerView)?.notify("detect",
               mapOf("format" to BARCODE_NAMES[barcode.format], "data" to barcode.rawValue))
-        })
+        }
       }
     }
   }).build()
-  private val cameraView: SurfaceView = SurfaceView(activity)
+  private val cameraView: SurfaceView = SurfaceView(scope.activity)
   private var cameraSource: CameraSource? = null
   private var surfaceAvailable = false
   private var startRequested = false
@@ -122,10 +126,13 @@ class BarcodeScannerView(private val activity: Activity, private val tabrisConte
     }
   }
 
-  override fun stateChanged(appState: AppState, intent: Intent?) {
-    when (appState) {
-      AppState.RESUME -> startWhenReady()
-      AppState.PAUSE -> cameraSource?.stop()
+  override fun activityStateChanged(activityState: ActivityState, intent: Intent?) {
+    when (activityState) {
+      RESUME -> startWhenReady()
+      PAUSE -> cameraSource?.stop()
+      else -> {
+        // nothing to do
+      }
     }
   }
 
@@ -133,19 +140,19 @@ class BarcodeScannerView(private val activity: Activity, private val tabrisConte
     withCameraPermission({
       startCamera(formats)
     }, {
-      remoteObject?.notify("error", "error", "Camera permission not granted")
+      scope.remoteObject(this)?.notify("error", "error", "Camera permission not granted")
     })
   }
 
   private fun withCameraPermission(successCallback: () -> Unit, errorCallback: () -> Unit) {
-    if (checkSelfPermission(activity, CAMERA) == PERMISSION_GRANTED) {
+    if (checkSelfPermission(scope.activity, CAMERA) == PERMISSION_GRANTED) {
       successCallback.invoke()
     } else {
-      tabrisContext.widgetToolkit.addRequestPermissionResult(object : IRequestPermissionResultListener {
-        override fun permissionsResultReceived(code: Int, permissions: Array<out String>, results: IntArray) {
-          if (code == rcPermissionCamera) {
-            tabrisContext.widgetToolkit.removeRequestPermissionResult(this)
-            if (results.elementAtOrNull(0) == PERMISSION_GRANTED) {
+      scope.events.addRequestPermissionResultListener(object : Events.RequestPermissionsResultListener {
+        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+          if (requestCode == rcPermissionCamera) {
+            scope.events.removeRequestPermissionResultListener(this)
+            if (grantResults.elementAtOrNull(0) == PERMISSION_GRANTED) {
               successCallback.invoke()
             } else {
               errorCallback.invoke()
@@ -154,20 +161,21 @@ class BarcodeScannerView(private val activity: Activity, private val tabrisConte
         }
 
       })
-      ActivityCompat.requestPermissions(activity, arrayOf(CAMERA), rcPermissionCamera)
+      ActivityCompat.requestPermissions(scope.activity, arrayOf(CAMERA), rcPermissionCamera)
     }
   }
 
   private fun startCamera(formats: Int) {
     this.formats = formats
-    val detector = BarcodeDetector.Builder(activity).setBarcodeFormats(formats).build().apply {
+    val detector = BarcodeDetector.Builder(scope.activity).setBarcodeFormats(formats).build().apply {
       setProcessor(multiProcessor)
     }
     if (!detector.isOperational) {
-      remoteObject?.notify("error", "error", "Barcode scanner dependencies not available. Is device storage available?")
+      scope.remoteObject(this)?.notify("error",
+          "error", "Barcode scanner dependencies not available. Is device storage available?")
       return
     }
-    cameraSource = CameraSource.Builder(activity, detector)
+    cameraSource = CameraSource.Builder(scope.activity, detector)
         .setRequestedPreviewSize(1024, 768)
         .setFacing(camera)
         .setAutoFocusEnabled(true)
@@ -183,7 +191,7 @@ class BarcodeScannerView(private val activity: Activity, private val tabrisConte
         cameraSource?.start(cameraView.holder)
         requestLayout()
       } catch (exception: Exception) {
-        remoteObject?.notify("error", "error", exception.message)
+        scope.remoteObject(this)?.notify("error", "error", exception.message)
       }
     }
   }

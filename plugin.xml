@@ -25,20 +25,17 @@
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <meta-data
-          android:name="com.eclipsesource.tabris.android.OPERATOR.com.eclipsesource.tabris.barcode-scanner"
-          android:value="com.eclipsesource.tabris.barcodescanner.BarcodeScannerViewOperator" />
+          android:name="com.eclipsesource.tabris.android.HANDLER.com.eclipsesource.tabris.barcodescanner"
+          android:value="com.eclipsesource.tabris.barcodescanner.BarcodeScannerViewHandler" />
     </config-file>
 
     <config-file target="AndroidManifest.xml" parent="/manifest">
       <uses-permission android:name="android.permission.CAMERA" />
     </config-file>
 
-    <framework src="com.android.support:appcompat-v7:27.0.2" />
     <framework src="com.google.android.gms:play-services-vision:12.0.1" />
 
-    <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewOperator.kt"
-                 target-dir="src/com/eclipsesource/tabris/barcodescanner" />
-    <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewPropertyHandler.kt"
+    <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewHandler.kt"
                  target-dir="src/com/eclipsesource/tabris/barcodescanner" />
     <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerView.kt"
                  target-dir="src/com/eclipsesource/tabris/barcodescanner" />
