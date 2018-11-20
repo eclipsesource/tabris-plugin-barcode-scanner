@@ -140,7 +140,7 @@ scanner.stop();
 
 ## Compatibility
   
-Compatible with [Tabris.js 2.3.0](https://github.com/eclipsesource/tabris-js/releases/tag/v2.3.0)
+Compatible with [Tabris.js 3.0.0](https://github.com/eclipsesource/tabris-js/releases/tag/v3.0.0)
 
 ### Supported platforms
 
