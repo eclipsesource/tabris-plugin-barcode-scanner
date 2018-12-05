@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Tabris/BasicWidget.h>
+#import <Tabris/Widget.h>
 
-@interface ESBarcodeScanner : BasicWidget
+@interface ESBarcodeScanner : Widget
 @property (strong, nonatomic) NSString *camera;
 @property (assign, nonatomic) BOOL detectListener;
 @property (assign, nonatomic) BOOL errorListener;
