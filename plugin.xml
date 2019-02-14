@@ -33,7 +33,7 @@
       <uses-permission android:name="android.permission.CAMERA" />
     </config-file>
 
-    <framework src="com.google.android.gms:play-services-vision:12.0.1" />
+    <framework src="com.google.android.gms:play-services-vision:17.0.2" />
 
     <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewHandler.kt"
                  target-dir="src/com/eclipsesource/tabris/barcodescanner" />
