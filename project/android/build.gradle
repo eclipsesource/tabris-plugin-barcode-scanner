@@ -19,6 +19,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
         maven {
             // provides tabris from directory repository
             url System.getenv("TABRIS_ANDROID_PLATFORM") + "/bin/templates/project/m2repository"
