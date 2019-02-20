@@ -27,6 +27,9 @@
       <meta-data
           android:name="com.eclipsesource.tabris.android.OPERATOR.com.eclipsesource.tabris.barcode-scanner"
           android:value="com.eclipsesource.tabris.barcodescanner.BarcodeScannerViewOperator" />
+      <meta-data
+          android:name="com.google.android.gms.vision.DEPENDENCIES"
+          android:value="barcode" />
     </config-file>
 
     <config-file target="AndroidManifest.xml" parent="/manifest">
