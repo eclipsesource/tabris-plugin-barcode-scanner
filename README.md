@@ -60,7 +60,7 @@ To fetch the latest development version use the GitHub URL:
 
 ### iOS
 
-The plugin requires key-value entry. `NSCameraUsageDescription` with description has to be added to the `Info.plist` file of your app to work correctly. Please include this configuration in your `config.xml` file. 
+The plugin requires key-value entry. `NSCameraUsageDescription` with description has to be added to the `Info.plist` file of your app to work correctly. Please include this configuration in your `config.xml` file.
 
 ```xml
 <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
@@ -79,7 +79,7 @@ The following properties can be applied in addition to the [common Tabris.js wid
 
 ##### `camera` : _string_, supported values: `front`, `back`, default: `back`
 
-The camera to use when scanning for barcodes. Has to be set in the constructor of the `BarcodeScannerView`. 
+The camera to use when scanning for barcodes. Has to be set in the constructor of the `BarcodeScannerView`.
 
 ##### `scaleMode` : _string_, supported values: `fit`, `fill`, default: `fit`
 
@@ -108,9 +108,9 @@ Fired when an error during the `BarcodeScannerView`s lifecycle happened. After a
 ##### Event parameter
 * `error`: _string_
   * A message providing details about the error
-  
+
 #### `activeChanged`
-  
+
 Fired when the [`active`](#active) state of the widget changes. Either by calling [`start()`](#startformats)/[`stop()`](#stop), receiving an [`error`](#error) event or disposing the widget.
 
 ### Methods
@@ -128,7 +128,7 @@ scanner.start(['qr']);
 
 * `formats` : _string[]_
   * The optional `formats` array allows to limit the detection of barcodes to only the given formats. The supported barcode names can be obtained from the [list of supported barcodes](#supported-barcode-formats). If `formats` is omitted all barcodes supported on the platform will be detected.
-  
+
 #### `stop()`
 
 Stops the barcode scanning and disables the camera.
@@ -139,8 +139,8 @@ scanner.stop();
 ```
 
 ## Compatibility
-  
-Compatible with [Tabris.js 3.0.0](https://github.com/eclipsesource/tabris-js/releases/tag/v3.0.0)
+
+Compatible with [Tabris.js 3.2.0](https://github.com/eclipsesource/tabris-js/releases/tag/v3.2.0)
 
 ### Supported platforms
 

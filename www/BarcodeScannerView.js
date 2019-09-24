@@ -47,11 +47,13 @@ class BarcodeScannerView extends tabris.Widget {
 
 tabris.NativeObject.defineProperties(BarcodeScannerView.prototype, {
   'camera': {
-    type: ['choice', ['front', 'back']],
+    type: 'string',
+    choice: ['front', 'back'],
     default: 'back'
   },
   'scaleMode': {
-    type: ['choice', ['fit', 'fill']],
+    type: 'string',
+    choice: ['fit', 'fill'],
     default: 'fit'
   },
   'active': {
