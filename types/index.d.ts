@@ -1,4 +1,4 @@
-import { EventObject, PropertyChangedEvent, Widget, WidgetEvents, WidgetProperties } from 'tabris';
+import { EventObject, JSXAttributes, Properties, PropertyChangedEvent, Widget } from 'tabris';
 /// <reference path='../../node_modules/tabris/tabris.d.ts' />
 
 interface BarcodeScannerViewProperties {
@@ -7,7 +7,7 @@ interface BarcodeScannerViewProperties {
   readonly active?: boolean;
 }
 
-interface BarcodeScannerViewEvents extends WidgetEvents {
+interface BarcodeScannerViewEvents {
   detect?: (event: DetectEvent) => void;
   error?: (event: ErrorEvent) => void;
     activeChanged?: (event: ActiveChangedEvent) => void;
@@ -17,13 +17,12 @@ declare global {
   namespace esbarcodescanner {
     interface BarcodeScannerView extends BarcodeScannerViewProperties {}
     class BarcodeScannerView extends Widget {
-      public tsProperties: WidgetProperties & BarcodeScannerViewProperties;
-      public jsxProperties: JSX.WidgetProperties & BarcodeScannerViewProperties & {
+      public jsxAttributes: JSXAttributes<this> & BarcodeScannerViewProperties & {
         onDetect?: (event: DetectEvent) => void,
         onError?: (event: ErrorEvent) => void,
         onActiveChanged?: (event: ActiveChangedEvent) => void
       };
-      constructor(properties: WidgetProperties & BarcodeScannerViewProperties);
+      constructor(properties: Properties<Widget> & BarcodeScannerViewProperties);
       start(formats: BarcodeScannerFormat[]): void;
       stop(): void;
       on(type: string, listener: (event: any) => void, context?: object): this;
