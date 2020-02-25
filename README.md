@@ -49,7 +49,7 @@ The Tabris.js website provides detailed information on how to [integrate custom 
 
 
 ```xml
-<plugin name="tabris-plugin-barcode-scanner" spec="1.x" />
+<plugin name="tabris-plugin-barcode-scanner" spec="3.x" />
 ```
 
 To fetch the latest development version use the GitHub URL:
