@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation 'com.eclipsesource.tabris.android:tabris:3.0.0'
+    implementation 'com.eclipsesource.tabris.android:tabris:3.6.0'
     implementation "androidx.appcompat:appcompat:$supportLibraryVersion"
     implementation "com.google.android.gms:play-services-vision:$playServicesVersion"
 }
@@ -24,6 +24,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     sourceSets {
