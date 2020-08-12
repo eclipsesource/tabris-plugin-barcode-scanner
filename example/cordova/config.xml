@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         id="com.eclipsesource.tabris.barcodescanner.example"
-        version="1.0.0"
+        version="3.1.0"
         android-packageName="com.eclipsesource.tabris.barcodescanner.example"
         android-versionCode="1">
   <name>Tabris.js Barcode Scanner Plugin Example</name>
@@ -15,5 +16,11 @@
   <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
     <string>Barcode scanner requires camera to be able to scan barcodes.</string>
   </edit-config>
+
+  <platform name="android">
+    <edit-config file="app/src/main/AndroidManifest.xml" target="/manifest/application" mode="merge">
+      <application android:usesCleartextTraffic="true" />
+    </edit-config>
+  </platform>
 
 </widget>
