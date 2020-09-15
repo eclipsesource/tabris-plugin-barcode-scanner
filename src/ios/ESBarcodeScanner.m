@@ -179,14 +179,14 @@
 }
 
 - (void)sendDetect:(NSString *)data format:(NSString *)format {
-    if (self.detectListener) {
+    if (self.detectListener && format && data) {
         [self fireEventNamed:@"detect" withAttributes:@{@"format":format, @"data":data}];
     }
 }
 
 - (void)sendError:(NSString *)error {
     if (self.errorListener) {
-        [self fireEventNamed:@"error" withAttributes:@{@"error":error}];
+        [self fireEventNamed:@"error" withAttributes:@{@"error":error ?: [NSNull null]}];
     }
 }
 
@@ -197,6 +197,11 @@
         if ([metadata isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             NSString *data = [(AVMetadataMachineReadableCodeObject *)metadata stringValue];
             NSString *format = metadata.type;
+
+            if (!data || !format) {
+                continue;
+            }
+
             if (![format isEqualToString:self.lastFormat] || ![data isEqualToString:self.lastData] || [[NSDate date] timeIntervalSince1970] - self.lastSent > 1) {
                 [self sendDetect:data format:format];
                 self.lastData = data;
