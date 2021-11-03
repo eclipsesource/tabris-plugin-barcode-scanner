@@ -78,16 +78,16 @@ class BarcodeScannerView(private val scope: ActivityScope)
   init {
     addView(cameraView)
     cameraView.holder.addCallback(object : SurfaceHolder.Callback {
-      override fun surfaceCreated(holder: SurfaceHolder?) {
+      override fun surfaceCreated(holder: SurfaceHolder) {
         surfaceAvailable = true
         startWhenReady()
       }
 
-      override fun surfaceDestroyed(holder: SurfaceHolder?) {
+      override fun surfaceDestroyed(holder: SurfaceHolder) {
         surfaceAvailable = false
       }
 
-      override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+      override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
       }
     })
     addOnLayoutChangeListener { _, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
