@@ -3,18 +3,18 @@ apply plugin: 'kotlin-android'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation 'com.eclipsesource.tabris.android:tabris:3.6.0'
+    implementation 'com.eclipsesource.tabris.android:tabris:3.9.0'
     implementation "androidx.appcompat:appcompat:$supportLibraryVersion"
     implementation "com.google.android.gms:play-services-vision:$playServicesVersion"
 }
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 32
     }
 
     lintOptions {
