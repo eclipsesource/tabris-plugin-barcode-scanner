@@ -2,19 +2,20 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation 'com.eclipsesource.tabris.android:tabris:3.9.0'
-    implementation "androidx.appcompat:appcompat:$supportLibraryVersion"
-    implementation "com.google.android.gms:play-services-vision:$playServicesVersion"
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0'
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:$camerax_version"
 }
 
 android {
 
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
     }
 
     lintOptions {
