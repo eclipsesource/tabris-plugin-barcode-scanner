@@ -19,29 +19,35 @@ let scanner = new esbarcodescanner.BarcodeScannerView({
 let controls = new Composite({
   id: 'controls',
   left: 0, right: 0, bottom: 0,
+  elevation: 2,
   background: '#FAFAFA',
 }).appendTo(contentView);
 
 let barcodeTextView = new TextView({
-  left: 0, top: 0, right: 0, height: 64,
-  text: '<i><b>Waiting for barcode...</b></i>',
+  left: 0, top: 0, right: 0, height: 48,
+  text: '<i>Scanning for barcode...</i>',
   markupEnabled: true,
   lineSpacing: 1.2,
   font: '16px',
   alignment: 'centerX',
-  background: 'white',
-  elevation: 2
+}).appendTo(controls);
+
+new Composite({
+  top: "prev()", left: 0, right: 0, height: 1,
+  background: '#00000022',
 }).appendTo(controls);
 
 let formatPicker = new Picker({
   left: 16, top: 'prev() 16', right: 16,
   itemCount: BARCODES.length,
+  selectionIndex: 0,
   itemText: (index) => BARCODES[index],
 }).appendTo(controls);
 
 new Picker({
   left: 16, top: 'prev() 16', right: 16,
   itemCount: SCALE_MODES.length,
+  selectionIndex: 0,
   itemText: (index) => SCALE_MODES[index],
 }).onSelect((event) => scanner.scaleMode = SCALE_MODES[event.index])
   .appendTo(controls);

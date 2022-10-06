@@ -5,7 +5,7 @@
         version="3.1.0"
         android-packageName="com.eclipsesource.tabris.barcodescanner.example"
         android-versionCode="1">
-  <name>Tabris.js Barcode Scanner Plugin Example</name>
+  <name>Barcode scanner example for Tabris.js</name>
   <description>Example for the Tabris.js Barcode Scanner plugin.</description>
   <author email="tabris@eclipsesource.com" href="https://tabrisjs.com">EclipseSource</author>
 
