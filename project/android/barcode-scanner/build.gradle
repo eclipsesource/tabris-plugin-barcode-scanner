@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 dependencies {
-    implementation 'com.eclipsesource.tabris.android:tabris:3.9.0'
+    implementation 'com.eclipsesource.tabris.android:tabris:3.8.0'
     implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0'
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
@@ -11,11 +11,11 @@ dependencies {
 
 android {
 
-    compileSdkVersion 33
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 31
     }
 
     lintOptions {
