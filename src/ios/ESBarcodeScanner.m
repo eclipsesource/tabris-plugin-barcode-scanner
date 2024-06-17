@@ -8,6 +8,7 @@
 
 #import "ESBarcodeScanner.h"
 #import "ESScannerView.h"
+#import <Tabris/Tabris.h>
 
 @interface ESBarcodeScanner () <AVCaptureMetadataOutputObjectsDelegate>
 @property (strong, nonatomic) ESScannerView *scanner;
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) NSString *lastData;
 @property (strong, nonatomic) NSString *lastFormat;
 @property (assign, nonatomic) NSTimeInterval lastSent;
+@property (strong, nonatomic) CodeDispatcher *backgroundCodeDispatcher;
 @end
 
 @implementation ESBarcodeScanner
@@ -25,6 +27,9 @@
 - (instancetype)initWithObjectId:(NSString *)objectId properties:(NSDictionary *)properties inContext:(id<TabrisContext>)context {
     self = [super initWithObjectId:objectId properties:properties inContext:context];
     if (self) {
+        dispatch_queue_t queue = dispatch_queue_create("ESBarcodeScanner_queue", DISPATCH_QUEUE_SERIAL);
+        self.backgroundCodeDispatcher = [[CodeDispatcher alloc] initWithQueue:queue
+                                                                  synchronous:NO];
         self.scanner = [ESScannerView new];
         [self registerSelector:@selector(start:) forCall:@"start"];
         [self registerSelector:@selector(stop) forCall:@"stop"];
@@ -41,8 +46,17 @@
         } else {
             self.scaleMode = @"fit";
         }
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(captureSessionRuntimeErrorNotification:)
+                                                     name:AVCaptureSessionRuntimeErrorNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)destroy {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 + (NSString *)remoteObjectType {
@@ -74,7 +88,9 @@
         if (self.session) {
             [self setFormats:[properties objectForKey:@"formats"]];
             [self.scanner addSession:self.session];
-            [self.session startRunning];
+            [self.backgroundCodeDispatcher dispatch:^{
+                [self.session startRunning];
+            }];
         }
     } else if (status == AVAuthorizationStatusDenied || status == AVAuthorizationStatusRestricted) {
         NSString *description = (status == AVAuthorizationStatusDenied) ? @"Camera permission not granted" : @"Camera access restricted";
@@ -95,7 +111,9 @@
 }
 
 - (void)stop {
-    [self.session stopRunning];
+    [self.backgroundCodeDispatcher dispatch:^{
+        [self.session stopRunning];
+    }];
 }
 
 - (void)initializeSession {
@@ -190,6 +208,14 @@
     }
 }
 
+#pragma mark - AVCaptureSessionRuntimeErrorNotification
+- (void)captureSessionRuntimeErrorNotification:(NSNotification*)notification {
+    NSError* error = [[notification.userInfo objectForKey:AVCaptureSessionErrorKey] objectAsInstanceOf:[NSError class]];
+    [self.context.asyncCodeDispatcher dispatch:^{
+        [self sendError:error.localizedDescription ?: error.description];
+    }];
+}
+
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate methods
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
@@ -197,7 +223,6 @@
         if ([metadata isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             NSString *data = [(AVMetadataMachineReadableCodeObject *)metadata stringValue];
             NSString *format = metadata.type;
-
             if (!data || !format) {
                 continue;
             }
