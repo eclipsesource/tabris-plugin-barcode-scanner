@@ -11,7 +11,7 @@
 
   <preference name="EnableDeveloperConsole" value="true" />
 
-  <plugin name="tabris-plugin-barcode-scanner" spec="../" />
+  <plugin name="tabris-plugin-barcode-scanner" spec="https://$GITHUB_TOKEN@github.com/eclipsesource/tabris-plugin-barcode-scanner.git" />
 
   <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
     <string>Barcode scanner requires camera to be able to scan barcodes.</string>
