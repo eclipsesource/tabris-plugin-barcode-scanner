@@ -60,6 +60,10 @@
     <source-file src="src/ios/ESBarcodeScanner.m" />
     <header-file src="src/ios/ESScannerView.h" />
     <source-file src="src/ios/ESScannerView.m" />
+    <header-file src="src/ios/BSCameraResolution.h" />
+    <source-file src="src/ios/BSCameraResolution.m" />
+    <header-file src="src/ios/AVCaptureDeviceFormat+TabrisBarcodeScanner.h" />
+    <source-file src="src/ios/AVCaptureDeviceFormat+TabrisBarcodeScanner.m" />
   </platform>
 
 </plugin>
