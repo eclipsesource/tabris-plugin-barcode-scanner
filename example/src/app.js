@@ -49,7 +49,25 @@ new Picker({
   .appendTo(controls);
 
 if (is_iOS) {
-  console.log(`Combinations available on this device, with camera: ${scanner.camera}.\n${JSON.stringify(tabris.contentView.children()[0].frameDurationsForResolutions,null,2)}`);
+  const optimalResolution = scanner.findOptimalResolution({
+    resolutions: scanner.frameDurationsForResolutions,
+    minResolution: { width: 640, height: 480 },
+    targetResolution: { width: 1280, height: 800 },
+    minFps: 60,
+    maxFps: 120
+  });
+  if (typeof optimalResolution === 'object' && optimalResolution !== null) {
+    try {
+      scanner.resolution = {
+        width: optimalResolution.width,
+        height: optimalResolution.height
+      };
+      scanner.frameDuration = optimalResolution.fps;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   initIOSPickers();
 }
 
