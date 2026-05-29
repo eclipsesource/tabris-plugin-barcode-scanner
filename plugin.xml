@@ -36,10 +36,10 @@
       <uses-permission android:name="android.permission.CAMERA" />
     </config-file>
 
-    <framework src="com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0" />
-    <framework src="androidx.camera:camera-camera2:1.1.0" />
-    <framework src="androidx.camera:camera-lifecycle:1.1.0" />
-    <framework src="androidx.camera:camera-view:1.1.0" />
+    <framework src="com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1" />
+    <framework src="androidx.camera:camera-camera2:1.5.3" />
+    <framework src="androidx.camera:camera-lifecycle:1.5.3" />
+    <framework src="androidx.camera:camera-view:1.5.3" />
 
     <source-file src="src/android/com/eclipsesource/tabris/barcodescanner/BarcodeScannerViewHandler.kt"
                  target-dir="src/com/eclipsesource/tabris/barcodescanner" />
